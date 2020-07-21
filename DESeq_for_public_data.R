@@ -28,6 +28,7 @@ metadata$Factor<-paste(metadata$Variety, metadata$Age, metadata$Stress.disease)
 
 {RESDRP000768<-as.data.frame(results(`DRP000768_count.tsv.gz dds`, contrast=c("Factor","Chinese Spring 24 days Phosphorous starvation 10 days", "Chinese Spring 24 days none"), pAdjustMethod='BH', alpha=0.05, format='DataFrame', tidy=T))
 RESDRP000768$Factor<-"ChineseSpring 24 days Phosphorous starvation 10 days"
+RESDRP000768$Gene<-row.names(RESDRP000768)
 RESDRP000768<-RESDRP000768[(RESDRP000768$padj <= 0.05),]
 RESDRP000768<-na.omit(RESDRP000768)}
 {
@@ -102,6 +103,7 @@ RESDRP000768<-na.omit(RESDRP000768)}
   RESERP013983<-na.omit(RESERP013983)}
 {RESERP015130<-as.data.frame(results(`ERP015130_count.tsv.gz dds`, contrast=c("unknown (Bangladesh) grain filling Magnaporthe oryzae symptomatic", "unknown (Bangladesh) grain filling Magnaporthe oryzae asymptomatic")))
   RESERP015130$Factor<-"unknown (Bangladesh) grain filling Magnaporthe oryzae"
+  RESERP015130$Gene<-row.names( RESERP015130)
   RESERP015130<-RESERP0151303[(RESERP015130$padj <= 0.05),]
   RESERP015130<-na.omit(RESERP015130)}
 {R1<-as.data.frame(results(`SRP022869_count.tsv.gz dds`, contrast=c("Factor", "Sevin 14 days Septoria tritici 4 days" , "Sevin 14 days none")))
@@ -175,6 +177,7 @@ RESDRP000768<-na.omit(RESDRP000768)}
   RESSRP048912<-na.omit(RESSRP048912)}
 {RESSRP060670<-as.data.frame(results(`SRP060670_count.tsv.gz dds`, contrast=c("Factor","Chinese Spring anthesis Fusarium graminearum inoculation 4 days", "Chinese Spring anthesis mock inoculation 4 days"), pAdjustMethod='BH', alpha=0.05, format='DataFrame', tidy=T))
   RESSRP060670$Factor<-"Chinese Spring anthesis Fusarium graminearum inoculation 4 days"
+  RESSRP060670$Gene<-row.names(RESSRP060670)
   RESSRP060670<-RESSRP060670[(RESSRP060670$padj <= 0.05),]
   RESSRP060670<-na.omit(RESSRP060670)}
 {R1<-as.data.frame(results(`SRP068165_count.tsv.gz dds`, contrast=c("Factor",  "Giza 168 9 days PEG 6000 12 hours"  , "Giza 168 9 days none")))
@@ -185,14 +188,21 @@ RESDRP000768<-na.omit(RESDRP000768)}
   R2$Factor<- "Giza 168 9 days PEG 6000 2 hours"   
   R3$Factor<- "Gemmiza 10 9 days PEG 6000 12 hours"
   R4$Factor<- "Gemmiza 10 9 days PEG 6000 2 hours" 
+  R1$Gene<-row.names(R1)
+  R2$Gene<-row.names(R2)
+  R3$Gene<-row.names(R3)
+  R4$Gene<-row.names(R4)
   RESSRP068165<-rbind(R1, R2, R3, R4)
   RESSRP068165<-RESSRP068165[(RESSRP068165$padj <= 0.05),]
   RESSRP068165<-na.omit(RESSRP068165)}
 {RESSRP078208<-as.data.frame(results(`SRP078208_count.tsv.gz dds`, contrast=c("Factor","Chara 3 days  Fusarium pseudograminearum inoculation 36 hours", "Chara 3 days  mock inoculation 36 hours"), pAdjustMethod='BH', alpha=0.05, format='DataFrame', tidy=T))
   RESSRP078208$Factor<-"Chara 3 days  Fusarium pseudograminearum inoculation 36 hours"
+  RESSRP078208$Gene<-row.names(RESSRP078208)
   RESSRP078208<-RESSRP078208[(RESSRP078208$padj <= 0.05),]
   RESSRP078208<-na.omit(RESSRP078208)}
   }
+
+all_data<-rbind(RESDRP000768, RESERP003465)
 
 dir.create("~/Documents/Sobia/orphans/Expression/DEgenes")
 setwd("~/Documents/Sobia/orphans/Expression/DEgenes")
@@ -205,3 +215,4 @@ write.csv(RESSRP048912,file= "RES_SRP048912.csv")
 write.csv(RESSRP060670,file= "RES_SRP060670.csv") 
 write.csv(RESSRP068165,file= "RES_SRP068165.csv") 
 write.csv(RESSRP078208,file= "RES_SRP078208.csv")
+write.csv(all_data, file='~/Documents/Sobia/orphans/Expression/DEgenes/all_data.csv')
