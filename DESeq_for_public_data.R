@@ -74,7 +74,6 @@ metadata$Factor<-paste(metadata$Variety, metadata$Age, metadata$Stress.disease)
     RESERP013829<- RESERP013829[( RESERP013829$padj <= 0.05),]
     RESERP013829<-na.omit( RESERP013829)
   }
-  
   {R1<-as.data.frame(results(`ERP003465_count.tsv.gz dds`, contrast=c("Factor", "CM-82036 anthesis Fusarium graminearum inoculation 30 hours" , "CM-82036 anthesis mock inoculation 30 hours")))
     R1$Factor<-"CM-82036 anthesis Fusarium graminearum inoculation 30 hours"
     R2<-as.data.frame(results(`ERP003465_count.tsv.gz dds`, contrast=c("Factor", "CM-82036 anthesis Fusarium graminearum inoculation 50 hours" , "CM-82036 anthesis mock inoculation 50 hours")))
@@ -116,7 +115,7 @@ metadata$Factor<-paste(metadata$Variety, metadata$Age, metadata$Stress.disease)
     R6<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Vuka three leaf stage stripe rust pathogen 87/66 9 days", "Vuka three leaf stage control")))
     R7<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Vuka three leaf stage stripe rust pathogen 87/66 11 days", "Vuka three leaf stage control")))
     R8<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Avocet+Yr5 three leaf stage stripe rust pathogen 87/66 1 day", "Avocet+Yr5 three leaf stage control")))
-    R9<-as.data.frame(results(`EERP013983_count.tsv.gz dds`, contrast=c("Factor","Avocet+Yr5 three leaf stage stripe rust pathogen 87/66 2 days", "Avocet+Yr5 three leaf stage control")))
+    R9<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Avocet+Yr5 three leaf stage stripe rust pathogen 87/66 2 days", "Avocet+Yr5 three leaf stage control")))
     R10<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Avocet+Yr5 three leaf stage stripe rust pathogen 87/66 3 days", "Avocet+Yr5 three leaf stage control")))
     R11<-as.data.frame(results(`ERP013983_count.tsv.gz dds`, contrast=c("Factor","Avocet+Yr5 three leaf stage stripe rust pathogen 87/66 5 days", "Avocet+Yr5 three leaf stage control")))
     R1$Factor<- "Vuka three leaf stage stripe rust pathogen 87/66 1 day"       
