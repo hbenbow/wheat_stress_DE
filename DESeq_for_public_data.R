@@ -154,12 +154,14 @@ metadata$Factor<-paste(metadata$Variety, metadata$Age, metadata$Stress.disease)
     R2$Factor<-"Sevin 14 days Septoria tritici 10 days"
     R3<-as.data.frame(results(`SRP022869_count.tsv.gz dds`, contrast=c( "Factor","Sevin 14 days Septoria tritici 13 days", "Sevin 14 days none")))
     R3$Factor<-"Sevin 14 days Septoria tritici 13 days"
-    RESSRP022869<-rbind(R1, R2, R3)
     R1$Gene<-row.names(R1)
     R2$Gene<-row.names(R2)
     R3$Gene<-row.names(R3)
+    RESSRP022869<-rbind(R1, R2, R3)
     RESSRP022869<-RESSRP022869[(RESSRP022869$padj <= 0.05),]
-    RESSRP022869<-na.omit(RESSRP022869)}
+    RESSRP022869<-na.omit(RESSRP022869)
+    }
+  
   {R1<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c( "Factor","N9134 7 days Powdery mildew pathogen E09 72 hours", "N9134 7 days none" )))
     R2<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c("Factor", "N9134 7 days Powdery mildew pathogen E09 48 hours", "N9134 7 days none")))
     R3<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c( "Factor","N9134 7 days Powdery mildew pathogen E09 24 hours", "N9134 7 days none")))
