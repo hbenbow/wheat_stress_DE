@@ -161,7 +161,24 @@ metadata$Factor<-paste(metadata$Variety, metadata$Age, metadata$Stress.disease)
     RESSRP022869<-RESSRP022869[(RESSRP022869$padj <= 0.05),]
     RESSRP022869<-na.omit(RESSRP022869)
     }
-  
+  {  R1<-as.data.frame(results(`ERP009837_count.tsv.gz dds`, contrast=c("Factor", "Riband 17 days Zymoseptoria tritici inoculation 1 day",  "Riband 17 days mock inoculation 1 day")))
+     R2<-as.data.frame(results(`ERP009837_count.tsv.gz dds`, contrast=c("Factor", "Riband 17 days Zymoseptoria tritici inoculation 4 days",  "Riband 17 days mock inoculation 4 days")))
+     R3<-as.data.frame(results(`ERP009837_count.tsv.gz dds`, contrast=c("Factor", "Riband 17 days Zymoseptoria tritici inoculation 9 days",  "Riband 17 days mock inoculation 9 days")))
+     R4<-as.data.frame(results(`ERP009837_count.tsv.gz dds`, contrast=c("Factor", "Riband 17 days Zymoseptoria tritici inoculation 14 days",  "Riband 17 days mock inoculation 14 days")))
+     R5<-as.data.frame(results(`ERP009837_count.tsv.gz dds`, contrast=c("Factor", "Riband 17 days Zymoseptoria tritici inoculation 21 days",  "Riband 17 days mock inoculation 21 days")))
+    R1$Factor<-"Riband 17 days Zymoseptoria tritici inoculation 1 days"
+    R2$Factor<-"Riband 17 days Zymoseptoria tritici inoculation 4 days"
+    R3$Factor<-"Riband 17 days Zymoseptoria tritici inoculation 9 days"
+    R4$Factor<-"Riband 17 days Zymoseptoria tritici inoculation 14 days"
+    R5$Factor<-"Riband 17 days Zymoseptoria tritici inoculation 21 days"
+    R1$Gene<-row.names(R1)
+    R2$Gene<-row.names(R2)
+    R3$Gene<-row.names(R3)
+    R4$Gene<-row.names(R4)
+    R5$Gene<-row.names(R5)
+    RESERP009837<-rbind(R1, R2, R3, R4, R5)
+    RESERP009837<- RESERP009837[( RESERP009837$padj <= 0.05),]
+    RESERP009837<-na.omit( RESERP009837)}
   {R1<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c( "Factor","N9134 7 days Powdery mildew pathogen E09 72 hours", "N9134 7 days none" )))
     R2<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c("Factor", "N9134 7 days Powdery mildew pathogen E09 48 hours", "N9134 7 days none")))
     R3<-as.data.frame(results(`SRP041017_count.tsv.gz dds`, contrast=c( "Factor","N9134 7 days Powdery mildew pathogen E09 24 hours", "N9134 7 days none")))
@@ -260,4 +277,47 @@ write.csv(RESSRP048912,file= "RES_SRP048912.csv", row.names=F)
 write.csv(RESSRP060670,file= "RES_SRP060670.csv", row.names=F) 
 write.csv(RESSRP068165,file= "RES_SRP068165.csv", row.names=F) 
 write.csv(RESSRP078208,file= "RES_SRP078208.csv", row.names=F)
+
+
 write.csv(all_data, file='~/Documents/Sobia/orphans/Expression/DEgenes/all_data.csv')
+
+RES_ERP013983.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_ERP013983.csv")
+RES_DRP000768.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_DRP000768.csv")
+RES_ERP003465.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_ERP003465.csv")
+RES_SRP022869.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP022869.csv")
+RES_SRP041017.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP041017.csv")
+RES_SRP045409.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP045409.csv")
+RES_SRP048912.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP048912.csv")
+RES_SRP060670.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP060670.csv")
+RES_SRP068165.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP068165.csv")
+RES_SRP078208.csv<-read.csv("~/Documents/Sobia/orphans/Expression/DEgenes/RES_SRP078208.csv")
+
+colnames(RES_ERP013983.csv)
+colnames(RES_DRP000768.csv)
+colnames(RES_ERP003465.csv)
+colnames(RES_SRP022869.csv)
+colnames(RES_SRP041017.csv)
+colnames(RES_SRP045409.csv)
+colnames(RES_SRP048912.csv)
+colnames(RES_SRP060670.csv)
+colnames(RES_SRP068165.csv)
+colnames(RES_SRP078208.csv)
+
+RES_SRP078208.csv$Gene<-RES_SRP078208.csv$row
+RES_SRP078208.csv$row<-NULL
+
+all_data<-rbind(RES_ERP013983.csv,
+                RES_DRP000768.csv,
+                RES_ERP003465.csv,
+                RES_SRP022869.csv,
+                RES_SRP041017.csv,
+                RES_SRP045409.csv,
+                RES_SRP048912.csv,
+                RES_SRP060670.csv,
+                RES_SRP068165.csv,
+                RES_SRP078208.csv)
+
+HGTs<-blast$sseqid
+
+hgt_exp<-subset(all_data, all_data$Gene %in% HGTs)
+
